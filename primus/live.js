@@ -9,10 +9,11 @@ module.exports.go = (server) => {
     //check if data received from client, then log
     spark.on("data", (data) => {
       console.log(data);
-      if (data.action === "newMessage") {
+      if (data.action === "updateStats") {
         primus.write({
-          action: "newMessage",
-          message: data.team,
+          "action": "updateStats",
+          "team": data.team,
+          "score": data.score,
         });
       }
     });
